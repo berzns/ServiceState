@@ -15,6 +15,8 @@ function Set-ServiceState
         {
 			# Test if file exists
 
+
+
 			if (Test-Path $CSVLocation)
 			{
 				write-host "Importing CSV file" -BackgroundColor Green
@@ -40,7 +42,7 @@ function Set-ServiceState
         {
           foreach ($Server in $ServerList) {
 
-			Write-Verbose "Working with $Server" -Verbose
+			Write-Verbose "Working on $Server" -Verbose
 
 			# Builds a service list per server
 			$ServiceList = $DashBoard | Where-Object {$_.'Server name' -EQ $Server}
@@ -133,9 +135,42 @@ function Set-ServiceState
 
         End
         {
-			Write-Host "The following list contains servers and services that failed to return to origional state " -BackgroundColor Red
+			
+            If(!([string]::IsNullOrEmpty($ServiceStatus))) {
 
-			Return $ServiceStatus
+                Write-Host "The following list contains servers and services that failed to return to origional state " -BackgroundColor Red
+                Write-Host "Services with empty ServiceSatus property do not exist " -BackgroundColor Red
+                Write-host ($ServiceStatus |Format-Table | Out-String )
+				
+				<##
+                $MissingServices= @()
+
+                foreach($ServiceStatusResult in $ServiceStatus){
+
+                If (![string]::IsNullOrEmpty($ServiceStatusResult.ServerName) -and ![string]::IsNullOrEmpty($ServiceStatusResult.ServiceName) -and [string]::IsNullOrEmpty($ServiceStatusResult.ServiceStatus)){
+
+                						$ObjMissingService = New-Object System.Object
+										$ObjMissingService | Add-Member -type NoteProperty -name ServerName -value $ServiceStatusResult.ServerName
+										$ObjMissingService | Add-Member -type NoteProperty -name ServiceName -value $ServiceStatusResult.ServiceName
+
+										$MissingServices += $ObjMissingService
+										##>
+                
+                }
+
+
+
+                }
+                #Write-Host "The following services do not exist" -BackgroundColor Red
+                #Write-host ($MissingServices |Format-Table | Out-String )
+
+
+              } else {
+              
+              Write-Host Services are in desired state! Have a good day! -ForegroundColor Green
+              }
+
+			
         }
 }
 
@@ -239,6 +274,8 @@ function Get-ServiceState
                 Write-Host "Services with empty ServiceSatus property do not exist " -BackgroundColor Red
                 Write-host ($ServiceStatus |Format-Table | Out-String )
 
+				<##
+
                 $MissingServices= @()
 
                 foreach($ServiceStatusResult in $ServiceStatus){
@@ -250,14 +287,15 @@ function Get-ServiceState
 										$ObjMissingService | Add-Member -type NoteProperty -name ServiceName -value $ServiceStatusResult.ServiceName
 
 										$MissingServices += $ObjMissingService
+										##>
                 
                 }
 
 
 
                 }
-                Write-Host "The following services do not exist" -BackgroundColor Red
-                Write-host ($MissingServices |Format-Table | Out-String )
+                #Write-Host "The following services do not exist" -BackgroundColor Red
+                #Write-host ($MissingServices |Format-Table | Out-String )
 
 
               } else {
@@ -268,5 +306,3 @@ function Get-ServiceState
 			
         }
 }
-
-
