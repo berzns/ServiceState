@@ -160,12 +160,12 @@ function Set-ServiceState
 
 
 
-                }
+                
                 #Write-Host "The following services do not exist" -BackgroundColor Red
                 #Write-host ($MissingServices |Format-Table | Out-String )
 
 
-              } else {
+               else {
               
               Write-Host Services are in desired state! Have a good day! -ForegroundColor Green
               }
@@ -289,11 +289,11 @@ function Get-ServiceState
 										$MissingServices += $ObjMissingService
 										##>
                 
-                }
+                
 
 
 
-                }
+                
                 #Write-Host "The following services do not exist" -BackgroundColor Red
                 #Write-host ($MissingServices |Format-Table | Out-String )
 
