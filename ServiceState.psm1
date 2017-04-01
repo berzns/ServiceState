@@ -236,7 +236,7 @@ function Get-ServiceState
 
 					}
 					Catch {
-						Write-Verbose ( "{0} : {1}" -f $_.Exception.GetType(), $_.Exception.Message )
+						Write-Verbose ( "There was an error {0} : {1}" -f $_.Exception.GetType(), $_.Exception.Message )
 						Continue
 					}
 
