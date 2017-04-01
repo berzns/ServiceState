@@ -1,0 +1,5 @@
+Server Name,Service Name,Display Name,Physical Path," ""Service Account"""," ""Service Type""",Status
+Localhost,BITS," ""Asos.BuyMerchandise.Monitoring.HealthChecker"""," ""D:\ASOS\processors\Asos.BuyMerchandise.Monitoring\Asos.BuyMerchandise.Monitoring.exe"""," ""ASSEENONSCREEN\PP_APP_ABMPMB"""," ""Auto""",Running
+.,BITS," ""Asos.BuyMerchandise.Monitoring.HealthChecker"""," ""D:\ASOS\processors\Asos.BuyMerchandise.Monitoring\Asos.BuyMerchandise.Monitoring.exe"""," ""ASSEENONSCREEN\PP_APP_ABMPMB"""," ""Auto""",Running
+Localhost,BITS," ""Asos.BuyMerchandise.Monitoring.HealthChecker"""," ""D:\ASOS\processors\Asos.BuyMerchandise.Monitoring\Asos.BuyMerchandise.Monitoring.exe"""," ""ASSEENONSCREEN\PP_APP_ABMPMB"""," ""Auto""",Running
+ASGLH-WL-07820,BITS," ""Asos.BuyMerchandise.Monitoring.HealthChecker"""," ""D:\ASOS\processors\Asos.BuyMerchandise.Monitoring\Asos.BuyMerchandise.Monitoring.exe"""," ""ASSEENONSCREEN\PP_APP_ABMPMB"""," ""Auto""",Stopped
