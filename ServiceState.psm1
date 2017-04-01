@@ -231,9 +231,16 @@ function Get-ServiceState
 					# making sure that the service is in desired state as in CSV file
                 
                     # Get service state for the incoming service
-                    $LiveServiceState = Get-Service -ComputerName $Server -Name $Srvc -ErrorAction Continue
+					Try {
+                    	$LiveServiceState = Get-Service -ComputerName $Server -Name $Srvc -ErrorAction Continue
 
-					If (!($LiveServiceState.Status -eq $Service.Status)) {
+					}
+					Catch {
+						Write-Verbose ( "{0} : {1}" -f $_.Exception.GetType(), $_.Exception.Message )
+						Continue
+					}
+
+					If (!($LiveServiceState.Status -eq $Service.Status -and ($LiveServiceState).status.count -ge 1)) {
 							Write-Host Service $Srvc on $Server is in WRONG state. Should be $Service.Status -BackgroundColor DarkRed
 
                           
